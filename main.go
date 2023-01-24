@@ -6,28 +6,51 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/kelseyhightower/envconfig"
 	"github.com/sirupsen/logrus"
 
 	agonesv1 "agones.dev/agones/pkg/apis/agones/v1"
 	sdk "agones.dev/agones/sdks/go"
 )
 
+type Env struct {
+	EnableHealthcheck   bool `envconfig:"ENABLE_HEALTHCHECK" default:"true"`
+	EnableLifetimecheck bool `envconfig:"ENABLE_LIFETIMECHECK" default:"true"`
+	EnableDeschedule    bool `envconfig:"ENABLE_DESCHEDULECHECK" default:"true"`
+
+	HealthcheckDuration   time.Duration `envconfig:"HEALTHCHECK_DURATION" default:"1s"`
+	LifetimecheckDuration time.Duration `envconfig:"LIFETIMECHECK_DURATION" default:"30m"`
+	DescheduleDuration    time.Duration `envconfig:"DESCHEDULE_DURATION" default:"2h"`
+}
+
 func main() {
-	logrus.Debug("main called")
+	logrus.Debug("setting environment variables...")
+	var env Env
+	err := envconfig.Process("", &env)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	logrus.Debug("starting sidecar processes...")
 	s, err := sdk.NewSDK()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
-	go healthCheck(s)
-	go checkLifetime(s)
-	go deschedule(s)
+	if env.EnableHealthcheck {
+		go healthCheck(s, env.HealthcheckDuration)
+	}
+	if env.EnableLifetimecheck {
+		go lifetimeCheck(s, env.LifetimecheckDuration)
+	}
+	if env.EnableDeschedule {
+		go deschedule(s, env.DescheduleDuration)
+	}
 	select {} // keep main goroutine
 }
 
-// do healthcheck every 1 second
-func healthCheck(s *sdk.SDK) {
+func healthCheck(s *sdk.SDK, duration time.Duration) {
 	logrus.Debug("healthcheck called")
-	for range time.Tick(time.Second) {
+	for range time.Tick(duration) {
 		if err := s.Health(); err != nil {
 			log.Fatalf(err.Error())
 		}
@@ -83,11 +106,10 @@ func getAnnotationLifetimeCertainly(s *sdk.SDK) int64 {
 	return 0
 }
 
-// check gameserver's lifetime every 5 minutes
 // if expire gameserver's lifetime, shutdown it
-func checkLifetime(s *sdk.SDK) {
+func lifetimeCheck(s *sdk.SDK, duration time.Duration) {
 	logrus.Debug("check lifetime called")
-	for range time.Tick(30 * time.Minute) {
+	for range time.Tick(duration) {
 		lifetime := getAnnotationLifetimeCertainly(s)
 		d := time.Now().Unix()
 		diff := lifetime - d
@@ -99,9 +121,9 @@ func checkLifetime(s *sdk.SDK) {
 }
 
 // shutdown gameserver which is not Allocated for deschedule
-func deschedule(s *sdk.SDK) {
+func deschedule(s *sdk.SDK, duration time.Duration) {
 	logrus.Debug("deschedule called")
-	for range time.Tick(time.Hour) {
+	for range time.Tick(duration) {
 		state := getStateCertainly(s)
 		// do not shutdown when calculating
 		allocated := agonesv1.GameServerStateAllocated
