@@ -1,5 +1,5 @@
 # gsidecar
-gsidecar is a container for healthcheck, lifetime check and deschedule AgonesSDKServer.  
+gsidecar is a container for healthcheck, lifetime check and deschedule AgonesSDKServer and gameserver.  
 This works as a sidecar of GameServer.
 
 ## Get image from DockerHub
