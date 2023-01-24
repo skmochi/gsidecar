@@ -1,7 +1,8 @@
-# agones-gameserver-sidecar
-A container for healthcheck, lifetime check and deschedule AgonesSDKServer
+# agones-sidecar
+A container for healthcheck, lifetime check and deschedule AgonesSDKServer.
+This works as a sidecar of GameServer.
 
-## Get image
+## Get image from DockerHub
 https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&ordering=last_updated
 
 ## Environment value
@@ -14,9 +15,14 @@ https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&orde
 |  LIFETIMECHECK_DURATION  |  time.Duration e.g. "1m"  | "30m" | a duration of lifetime check |
 |  DESCHEDULE_DURATION  |  time.Duration e.g. "1h"  | "2h" | a duration of deschedule |
 
+
 ## What is LifetimeCheck?
-xxx
+This automatically shutdowns gameserver when the time set in the annotation "agones.dev/sdk-lifetime" is exceeded.
+The annotation must be set in Unixtime.
+This works every LIFETIMECHECK_DURATION time.
 
 
 ## What is Deschedule?
-xxx
+Therefore Gameserver is not evictable, their placement would be scatter.
+This option shutdown gameserver whose state is not "Allocated" automatically.
+This works every DESCHEDULE_DURATION time.
