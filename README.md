@@ -1,4 +1,4 @@
-# agones-sidecar
+# gsidecar
 A container for healthcheck, lifetime check and deschedule AgonesSDKServer.  
 This works as a sidecar of GameServer.
 
