@@ -17,12 +17,12 @@ https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&orde
 
 
 ## What is LifetimeCheck?
-This automatically shutdowns gameserver when the time set in the annotation "agones.dev/sdk-lifetime" is exceeded.
-The annotation must be set in Unixtime.
+This automatically shutdowns gameserver when the time set in the annotation "agones.dev/sdk-lifetime" is exceeded.  
+The annotation must be set in Unixtime.  
 This works every LIFETIMECHECK_DURATION time.
 
 
 ## What is Deschedule?
-Therefore Gameserver is not evictable, their placement would be scatter.
-This option shutdown gameserver whose state is not "Allocated" automatically.
+Therefore Gameserver is not evictable, their placement would be scatter.  
+This option shutdown gameserver whose state is not "Allocated" automatically.  
 This works every DESCHEDULE_DURATION time.
