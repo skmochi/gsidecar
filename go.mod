@@ -1,4 +1,4 @@
-module example.co.jp/package_example
+module github.com/sk-mochi/agones-gameserver-sidecar
 
 go 1.19
 
