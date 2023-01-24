@@ -8,9 +8,9 @@ https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&orde
 ## Environment value
 |  Key |  Value  | default | Description |
 | ---- | ---- | ---- | ---- |
-|  ENABLE_HEALTHCHECK | "true" | "true" or "false" | use healthcheck or not |
-|  ENABLE_LIFETIMECHECK  | "true" | "true" or "false"  | use lifetime check or not |
-|  ENABLE_DESCHEDULECHECK  |  "true" |  "true" or "false"  | use descheduler or not |
+|  ENABLE_HEALTHCHECK | "true" or "false" | "true" | use healthcheck or not |
+|  ENABLE_LIFETIMECHECK  | "true" or "false" | "true" | use lifetime check or not |
+|  ENABLE_DESCHEDULECHECK  |  "true" or "false" |  "true" | use descheduler or not |
 |  HEALTHCHECK_DURATION  |  time.Duration e.g. "1s" | "1s" | a duration of healthcheck |
 |  LIFETIMECHECK_DURATION  |  time.Duration e.g. "1m"  | "30m" | a duration of lifetime check |
 |  DESCHEDULE_DURATION  |  time.Duration e.g. "1h"  | "2h" | a duration of deschedule |
