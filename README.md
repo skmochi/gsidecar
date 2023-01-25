@@ -13,7 +13,7 @@ https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&orde
 |  ENABLE_DESCHEDULECHECK  |  "true" or "false" |  "true" | use descheduler or not |
 |  HEALTHCHECK_DURATION  |  time.Duration e.g. "1s" | "1s" | a duration of healthcheck |
 |  LIFETIMECHECK_DURATION  |  time.Duration e.g. "1m"  | "30m" | a duration of lifetime check |
-|  DESCHEDULE_DURATION  |  time.Duration e.g. "1h"  | "2h" | a duration of deschedule |
+|  DESCHEDULE_DURATION  |  time.Duration e.g. "1h"  | "1h" | a duration of deschedule |
 
 
 ## What is LifetimeCheck?
