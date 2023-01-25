@@ -20,7 +20,7 @@ type Env struct {
 
 	HealthcheckDuration   time.Duration `envconfig:"HEALTHCHECK_DURATION" default:"1s"`
 	LifetimecheckDuration time.Duration `envconfig:"LIFETIMECHECK_DURATION" default:"30m"`
-	DescheduleDuration    time.Duration `envconfig:"DESCHEDULE_DURATION" default:"2h"`
+	DescheduleDuration    time.Duration `envconfig:"DESCHEDULE_DURATION" default:"1h"`
 }
 
 func main() {
