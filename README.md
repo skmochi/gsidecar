@@ -6,14 +6,14 @@ This works as a sidecar of GameServer.
 https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&ordering=last_updated
 
 ## Environment value
-|  Key |  Value  | default | Description |
-| ---- | ---- | ---- | ---- |
-|  ENABLE_HEALTHCHECK | "true" or "false" | "true" | use healthcheck or not |
-|  ENABLE_LIFETIMECHECK  | "true" or "false" | "true" | use lifetime check or not |
-|  ENABLE_DESCHEDULECHECK  |  "true" or "false" |  "true" | use descheduler or not |
-|  HEALTHCHECK_DURATION  |  time.Duration e.g. "1s" | "1s" | a duration of healthcheck |
-|  LIFETIMECHECK_DURATION  |  time.Duration e.g. "1m"  | "30m" | a duration of lifetime check |
-|  DESCHEDULE_DURATION  |  time.Duration e.g. "1h"  | "1h" | a duration of deschedule |
+|  Key |  type of Value | example of Value | default Value | Description |
+| ---- | ---- | ---- | ---- | ---- |
+|  ENABLE_HEALTHCHECK | bool | "true" | "true" | use healthcheck or not |
+|  ENABLE_LIFETIMECHECK  | bool | "false" | "true" | use lifetime check or not |
+|  ENABLE_DESCHEDULECHECK  | bool | "true" |  "true" | use descheduler or not |
+|  HEALTHCHECK_DURATION  |  time.Duration | "1s" | "1s" | a duration of healthcheck |
+|  LIFETIMECHECK_DURATION  |  time.Duration | "1m"  | "30m" | a duration of lifetime check |
+|  DESCHEDULE_DURATION  |  time.Duration | "3h"  | "1h" | a duration of deschedule |
 
 
 ## What is LifetimeCheck?
