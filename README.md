@@ -1,9 +1,39 @@
 # gsidecar
-gsidecar is a container for healthcheck, lifetime check and deschedule AgonesSDKServer and gameserver.  
+gsidecar is a container for healthcheck, lifetime check and deschedule Agones SDKServer and GameGerver.  
 This works as a sidecar of GameServer.
 
+## How to use
+An example of Fleet.
+```yaml
+apiVersion: "agones.dev/v1"
+kind: Fleet
+metadata:
+  name: test
+  namespace: test
+spec:
+  template:
+    spec:
+      ports:
+      - name: default
+        containerPort: 7654
+      # if there is more than one container, specify which one is the game server
+      container: app
+      template:
+        spec:
+          containers:
+          - name: app
+            image: APPLICATION_IMAGE
+          - name: gsidecar
+            image: THIS_IMAGE
+            env:
+            - name: ENABLE_HEALTHCHECK
+              value: "true"
+            - name: HEALTHCHECK_DURATION
+              value: "5s"
+```
+
 ## Get image from DockerHub
-https://hub.docker.com/repository/docker/skmochi/agones-sidecar/tags?page=1&ordering=last_updated
+https://hub.docker.com/repository/docker/skmochi/gsidecar/tags?page=1&ordering=last_updated
 
 ## Environment value
 |  Key |  type of Value | example of Value | default Value | Description |
