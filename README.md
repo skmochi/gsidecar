@@ -24,7 +24,7 @@ spec:
           - name: app
             image: APPLICATION_IMAGE
           - name: gsidecar
-            image: THIS_IMAGE
+            image: skmochi/gsidecar:latest
             env:
             - name: ENABLE_HEALTHCHECK
               value: "true"
@@ -33,7 +33,7 @@ spec:
 ```
 
 ## Get image from DockerHub
-https://hub.docker.com/repository/docker/skmochi/gsidecar/tags?page=1&ordering=last_updated
+https://hub.docker.com/r/skmochi/gsidecar
 
 ## Environment value
 |  Key |  type of Value | example of Value | default Value | Description |
