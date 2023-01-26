@@ -26,3 +26,4 @@ This works every LIFETIMECHECK_DURATION time.
 Therefore Gameserver is not evictable, their placement would be scatter.  
 This option shutdown gameserver whose state is not "Allocated" automatically.  
 This works every DESCHEDULE_DURATION time.
+You should use this option with "Packed" storategy.
