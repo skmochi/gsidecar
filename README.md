@@ -3,7 +3,7 @@ gsidecar is a container for healthcheck, lifetime check and deschedule Agones SD
 This works as a sidecar of GameServer.
 
 ## How to use
-An example of Fleet.
+An example of Fleet. Use this image as a sidecar of GameServer.
 ```yaml
 apiVersion: "agones.dev/v1"
 kind: Fleet
